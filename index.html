@@ -2,35 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>评论功能示例</title>
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .comment-box { width: 100%; max-width: 600px; margin: 20px auto; }
-        .comment { border-bottom: 1px solid #ccc; padding: 10px 0; }
-        .comment-input { width: 100%; padding: 10px; margin-bottom: 10px; }
-        .comment-button { padding: 10px 20px; }
-    </style>
+    <title>Title</title>
 </head>
 <body>
-    <div class="comment-box">
-        <textarea id="comment-input" class="comment-input" placeholder="输入你的评论..."></textarea>
-        <button id="comment-button" class="comment-button">提交评论</button>
-        <div id="comments"></div>
-    </div>
+<table width="800" border="1" align="center" cellspacing="0" cellpadding="0" height="600"
+       bordercolor="#FFFFFF"id="comment">
+    <tr>
+        <td width="18%" height="27" align="center">评论人</td>
+        <td width="82%" align="center">评论内容</td>
+    </tr>
 
-    <script>
-        document.getElementById('comment-button').addEventListener('click', function() {
-            var commentInput = document.getElementById('comment-input');
-            var commentText = commentInput.value;
-            if (commentText) {
-                var commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                commentDiv.textContent = commentText;
-                document.getElementById('comments').appendChild(commentDiv);
-                commentInput.value = '';
-            }
-        });
-    </script>
+    <tfoot>
+    <tr>
+     <td style="padding-left: 30px" colspan="2" align="center"><form name="form1" method="post" action="">
+    评论人：&nbsp;&nbsp;&nbsp;&nbsp;<br><input name="person" type="text" id="person" size="40"><br>
+    评论内容：<br><textarea name="content" id="content" cols="60" rows="6"></textarea>
+     </form><br>
+
+        <input name="Button" type="button" value="发表" onclick="add_()">
+<input name="Reset" type="reset" value="重置">
+<input name="Button" type="button" value="删除第一条评论" onclick="delete_first()">
+            <input name="Button" type="button" value="删除最后一条评论" onclick="delete_last()">
+     </td> </tr></tfoot>
+
+
+
+</table>
+<script>
+    function add_() {
+        var person=document.createTextNode(form1.person.value);
+        var content=document.createTextNode(form1.content.value);
+        var td_person=document.createElement("td");
+        var td_content=document.createElement("td");
+        var tr=document.createElement("tr");
+        var tbody=document.createElement("tbody");
+        td_person.appendChild(person);
+        td_content.appendChild(content);
+        tr.appendChild(td_person);
+        tr.appendChild(td_content);
+        tbody.appendChild(tr);
+        var tComment = document.getElementById("comment");
+        tComment.appendChild(tbody);
+        form1.person.value="";
+        form1.content.value="";
+    }
+
+    function delete_first() {
+        var tComment=document.getElementById("comment");
+        if(tComment.rows.length>1){
+            tComment.deleteRow(1);
+        }
+    }
+
+    function delete_last() {
+        var tComment=document.getElementById("comment");
+        if(tComment.rows.length>1){
+            tComment.deleteRow(tComment.rows.length-1);
+        }
+    }
+</script>
 </body>
 </html>
+
+
